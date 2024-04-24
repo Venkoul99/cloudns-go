@@ -85,7 +85,7 @@ func (z Zone) List(a *Apiaccess) ([]Record, error) {
 			tmpport := rec.Port
 			tmpmail := rec.Mail
 			tmptxt := rec.Txt
-			tmpalgorithm := rec.Algorithm
+			tmpalgorithm, _ := strconv.Atoi(rec.Algorithm)
 			tmpfptype := rec.Fptype
 			rectmp := Record{
 				Domain:           z.Domain,
@@ -195,60 +195,63 @@ func (z Zone) Destroy(a *Apiaccess) (Zone, error) {
 // Record is the external representation of a record
 // check the ...record types in api.go for details
 type Record struct {
-	ID               string  `json:"id"`
-	Domain           string  `json:"domain-name"`
-	Host             string  `json:"host"`
-	Rtype            string  `json:"record-type"`
-	TTL              int     `json:"ttl"`
-	Record           string  `json:"record"`
-	Priority         int     `json:"priority,omitempty"`
-	Weight           int     `json:"weight,omitempty"`
-	Port             int     `json:"port,omitempty"`
-	Frame            int     `json:"frame,omitempty"`
-	FrameTitle       string  `json:"frame-title,omitempty"`
-	FrameKeywords    string  `json:"frame-keywords,omitempty"`
-	FrameDescription string  `json:"frame-description,omitempty"`
-	MobileMeta       int     `json:"mobile-meta,omitempty"`
-	SavePath         int     `json:"save-path,omitempty"`
-	RedirectType     int     `json:"redirect-type,omitempty"`
-	Mail             string  `json:"mail,omitempty"`
-	Txt              string  `json:"txt,omitempty"`
-	Algorithm        int     `json:"algorithm,omitempty"`
-	Fptype           int     `json:"fptype,omitempty"`
-	Status           int     `json:"status,omitempty"`
-	GeodnsLocation   int     `json:"geodns-location,omitempty"`
-	GeodnsCode       string  `json:"geodns-code,omitempty"`
-	CaaFlag          int     `json:"caa_flag,omitempty"`
-	CaaType          string  `json:"caa_type,omitempty"`
-	CaaValue         string  `json:"caa_value,omitempty"`
-	TlsaUsage        string  `json:"tlsa_usage,omitempty"`
-	TlsaSelector     string  `json:"tlsa_selector,omitempty"`
-	TlsaMatchingType string  `json:"tlsa_matching_type,omitempty"`
-	KeyTag           int     `json:"key-tag,omitempty"`
-	DigestType       int     `json:"digest-type,omitempty"`
-	Order            string  `json:"order,omitempty"`
-	Pref             string  `json:"pref,omitempty"`
-	Flag             int     `json:"flag,omitempty"`
-	Params           string  `json:"params,omitempty"`
-	Regexp           string  `json:"regexp,omitempty"`
-	Replace          int     `json:"replace,omitempty"`
-	CertType         int     `json:"cert-type,omitempty"`
-	CertKeyTag       int     `json:"cert-key-tag,omitempty"`
-	CertAlgorithm    int     `json:"cert-algorithm,omitempty"`
-	LatDeg           float32 `json:"lat-deg,omitempty"`
-	LatMin           float32 `json:"lat-min,omitempty"`
-	LatSec           float32 `json:"lat-sec,omitempty"`
-	LatDir           string  `json:"lat-dir,omitempty"`
-	LongDeg          float32 `json:"long-deg,omitempty"`
-	LongMin          float32 `json:"long-min,omitempty"`
-	LongSec          float32 `json:"long-sec,omitempty"`
-	LongDir          string  `json:"long-dir,omitempty"`
-	Altitude         float32 `json:"altitude,omitempty"`
-	Size             float32 `json:"size,omitempty"`
-	HPrecision       float32 `json:"h-precision,omitempty"`
-	VPrecision       float32 `json:"v-precision,omitempty"`
-	CPU              string  `json:"cpu,omitempty"`
-	OS               string  `json:"os,omitempty"`
+	ID                 string  `json:"id"`
+	Domain             string  `json:"domain-name"`
+	Host               string  `json:"host"`
+	Rtype              string  `json:"record-type"`
+	TTL                int     `json:"ttl"`
+	Record             string  `json:"record"`
+	Priority           int     `json:"priority,omitempty"`
+	Weight             int     `json:"weight,omitempty"`
+	Port               int     `json:"port,omitempty"`
+	Frame              int     `json:"frame,omitempty"`
+	FrameTitle         string  `json:"frame-title,omitempty"`
+	FrameKeywords      string  `json:"frame-keywords,omitempty"`
+	FrameDescription   string  `json:"frame-description,omitempty"`
+	MobileMeta         int     `json:"mobile-meta,omitempty"`
+	SavePath           int     `json:"save-path,omitempty"`
+	RedirectType       int     `json:"redirect-type,omitempty"`
+	Mail               string  `json:"mail,omitempty"`
+	Txt                string  `json:"txt,omitempty"`
+	Algorithm          int     `json:"algorithm,omitempty"`
+	Fptype             int     `json:"fptype,omitempty"`
+	Status             int     `json:"status,omitempty"`
+	GeodnsLocation     int     `json:"geodns-location,omitempty"`
+	GeodnsCode         string  `json:"geodns-code,omitempty"`
+	CaaFlag            int     `json:"caa_flag,omitempty"`
+	CaaType            string  `json:"caa_type,omitempty"`
+	CaaValue           string  `json:"caa_value,omitempty"`
+	TlsaUsage          string  `json:"tlsa_usage,omitempty"`
+	TlsaSelector       string  `json:"tlsa_selector,omitempty"`
+	TlsaMatchingType   string  `json:"tlsa_matching_type,omitempty"`
+	SmimeaUsage        string  `json:"smimea_usage,omitempty"`
+	SmimeaSelector     string  `json:"smimea_selector,omitempty"`
+	SmimeaMatchingType string  `json:"smimea_matching_type,omitempty"`
+	KeyTag             int     `json:"key-tag,omitempty"`
+	DigestType         int     `json:"digest-type,omitempty"`
+	Order              string  `json:"order,omitempty"`
+	Pref               string  `json:"pref,omitempty"`
+	Flag               int     `json:"flag,omitempty"`
+	Params             string  `json:"params,omitempty"`
+	Regexp             string  `json:"regexp,omitempty"`
+	Replace            int     `json:"replace,omitempty"`
+	CertType           int     `json:"cert-type,omitempty"`
+	CertKeyTag         int     `json:"cert-key-tag,omitempty"`
+	CertAlgorithm      int     `json:"cert-algorithm,omitempty"`
+	LatDeg             float64 `json:"lat-deg,omitempty"`
+	LatMin             float64 `json:"lat-min,omitempty"`
+	LatSec             float64 `json:"lat-sec,omitempty"`
+	LatDir             string  `json:"lat-dir,omitempty"`
+	LongDeg            float64 `json:"long-deg,omitempty"`
+	LongMin            float64 `json:"long-min,omitempty"`
+	LongSec            float64 `json:"long-sec,omitempty"`
+	LongDir            string  `json:"long-dir,omitempty"`
+	Altitude           float64 `json:"altitude,omitempty"`
+	Size               float64 `json:"size,omitempty"`
+	HPrecision         float64 `json:"h-precision,omitempty"`
+	VPrecision         float64 `json:"v-precision,omitempty"`
+	CPU                string  `json:"cpu,omitempty"`
+	OS                 string  `json:"os,omitempty"`
 }
 
 // Create a new record
@@ -280,7 +283,53 @@ func (r Record) Create(a *Apiaccess) (Record, error) {
 	} else if r.Rtype == "RP" {
 		inr.Mail = r.Mail
 		inr.Txt = r.Txt
+	} else if r.Rtype == "SSHFP" {
+		inr.Algorithm = r.Algorithm
+		inr.Fptype = r.Fptype
+	} else if r.Rtype == "NAPTR" {
+		inr.Flag = r.Flag
+		inr.Order = r.Order
+		inr.Pref = r.Pref
+		inr.Params = r.Params
+		inr.Regexp = r.Regexp
+		inr.Replace = r.Replace
+	} else if r.Rtype == "CAA" {
+		inr.CaaFlag = r.CaaFlag
+		inr.CaaType = r.CaaType
+		inr.CaaValue = r.CaaValue
+	} else if r.Rtype == "TLSA" {
+		inr.TlsaUsage = r.TlsaUsage
+		inr.TlsaSelector = r.TlsaSelector
+		inr.TlsaMatchingType = r.TlsaMatchingType
+	} else if r.Rtype == "DS" {
+		inr.KeyTag = r.KeyTag
+		inr.Algorithm = r.Algorithm
+		inr.DigestType = r.DigestType
+	} else if r.Rtype == "CERT" {
+		inr.CertType = r.CertAlgorithm
+		inr.CertKeyTag = r.CertKeyTag
+		inr.CertAlgorithm = r.CertAlgorithm
+	} else if r.Rtype == "HINFO" {
+		inr.CPU = r.CPU
+		inr.OS = r.OS
+	} else if r.Rtype == "LOC" {
+		inr.LatDeg = r.LatDeg
+		inr.LatMin = r.LatMin
+		inr.LatDir = r.LatDir
+		inr.LongDeg = r.LongDeg
+		inr.LongMin = r.LongMin
+		inr.LongSec = r.LongSec
+		inr.LongDir = r.LongDir
+		inr.Altitude = r.Altitude
+		inr.Size = r.Size
+		inr.HPrecision = r.HPrecision
+		inr.VPrecision = r.VPrecision
+	} else if r.Rtype == "SMIMEA" {
+		inr.SmimeaUsage = r.SmimeaUsage
+		inr.SmimeaSelector = r.SmimeaSelector
+		inr.SmimeaMatchingType = r.SmimeaMatchingType
 	}
+
 	resp, err := inr.create()
 	if err == nil {
 		errmsg, isapierr := checkapierr(resp.Body())
@@ -325,6 +374,8 @@ func (r Record) Read(a *Apiaccess) (Record, error) {
 			tmpport := rec.Port
 			tmptxt := rec.Txt
 			tmpmail := rec.Mail
+			tmpalgorithm, _ := strconv.Atoi(rec.Algorithm)
+			tmpfptype := rec.Fptype
 			rectmp := Record{
 				Domain:           r.Domain,
 				ID:               rec.ID,
@@ -344,6 +395,8 @@ func (r Record) Read(a *Apiaccess) (Record, error) {
 				Port:             tmpport,
 				Txt:              tmptxt,
 				Mail:             tmpmail,
+				Algorithm:        tmpalgorithm,
+				Fptype:           tmpfptype,
 			}
 			if r.ID != "" && r.ID == rectmp.ID {
 				return rectmp, err2
@@ -386,7 +439,11 @@ func (r Record) Update(a *Apiaccess) (Record, error) {
 	} else if r.Rtype == "RP" {
 		inr.Txt = r.Txt
 		inr.Mail = r.Mail
+	} else if r.Rtype == "SSHFP" {
+		inr.Algorithm = r.Algorithm
+		inr.Fptype = r.Fptype
 	}
+
 	resp, err := inr.update()
 	if err == nil {
 		errmsg, isapierr := checkapierr(resp.Body())
