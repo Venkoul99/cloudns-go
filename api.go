@@ -93,13 +93,33 @@ func (r reclist) lsrec() (*resty.Response, error) {
 // they come back in a completely different format
 // in this case we currently ignore failover, status and dynamicurl_status
 type retrec struct {
-	ID       string `json:"id"`
-	Host     string `json:"host"`
-	Rtype    string `json:"type"`
-	TTL      string `json:"ttl"`
-	Record   string `json:"record"`
-	Priority string `json:"priority,omitempty"`
-	Frame    int    `json:"priority,omitempty"`
+	ID               string `json:"id"`
+	Host             string `json:"host"`
+	Rtype            string `json:"type"`
+	TTL              string `json:"ttl"`
+	Record           string `json:"record"`
+	Priority         string `json:"priority,omitempty"`
+	Weight           int    `json:"weight,omitempty"`
+	Port             int    `json:"port,omitempty"`
+	Frame            string `json:"frame,omitempty"`
+	FrameTitle       string `json:"frame-title,omitempty"`
+	FrameKeywords    string `json:"frame-keywords,omitempty"`
+	FrameDescription string `json:"frame-description,omitempty"`
+	SavePath         int    `json:"save-path,omitempty"`
+	MobileMeta       int    `json:"mobile-meta,omitempty"`
+	RedirectType     int    `json:"redirect-type,omitempty"`
+	Mail             string `json:"mail,omitempty"`
+	Txt              string `json:"txt,omitempty"`
+	Algorithm        string `json:"algorithm,omitempty"`
+	Fptype           string `json:"fptype,omitempty"`
+	Status           int    `json:"status,omitempty"`
+	GeodnsLocation   int    `json:"geodns-location,omitempty"`
+	CaaFlag          int    `json:"caa_flag,omitempty"`
+	CaaType          string `json:"caa_type,omitempty"`
+	CaaValue         string `json:"caa_value,omitempty"`
+	Tusage           string `json:"tlsa_usage,omitempty"`
+	Tselector        string `json:"tlsa_selector,omitempty"`
+	Tmatchtype       string `json:"tlsa_matching_type,omitempty"`
 }
 
 // zonelist struct to lists zones, see https://www.cloudns.net/wiki/article/50/
@@ -121,35 +141,36 @@ func (z zonelist) lszone() (*resty.Response, error) {
 
 // createrec stuct to create a record, see https://www.cloudns.net/wiki/article/58/
 type createrec struct {
-	Authid         int    `json:"auth-id,omitempty"`
-	Subauthid      int    `json:"sub-auth-id,omitempty"`
-	Authpassword   string `json:"auth-password"`
-	Domain         string `json:"domain-name"`
-	Rtype          string `json:"record-type"`
-	TTL            int    `json:"ttl"`
-	Host           string `json:"host"`
-	Record         string `json:"record"`
-	Priority       *int   `json:"priority,omitempty"`
-	Weight         int    `json:"weight,omitempty"`
-	Port           int    `json:"port,omitempty"`
-	Frame          int    `json:"frame,omitempty"`
-	FrameTitle     string `json:"frame-title,omitempty"`
-	FrameKeywords  string `json:"frame-keywords,omitempty"`
-	FrameDesc      string `json:"frame-description,omitempty"`
-	SavePath       int    `json:"save-path,omitempty"`
-	RedirectType   int    `json:"redirect-type,omitempty"`
-	Mail           string `json:"mail,omitempty"`
-	Txt            string `json:"txt,omitempty"`
-	Algorithm      string `json:"algorithm,omitempty"`
-	Fptype         string `json:"fptype,omitempty"`
-	Status         int    `json:"status,omitempty"`
-	GeodnsLocation int    `json:"geodns-location,omitempty"`
-	CaaFlag        int    `json:"caa_flag,omitempty"`
-	CaaType        string `json:"caa_type,omitempty"`
-	CaaValue       string `json:"caa_value,omitempty"`
-	Tusage         string `json:"tlsa_usage,omitempty"`
-	Tselector      string `json:"tlsa_selector,omitempty"`
-	Tmatchtype     string `json:"tlsa_matching_type,omitempty"`
+	Authid           int    `json:"auth-id,omitempty"`
+	Subauthid        int    `json:"sub-auth-id,omitempty"`
+	Authpassword     string `json:"auth-password"`
+	Domain           string `json:"domain-name"`
+	Rtype            string `json:"record-type"`
+	TTL              int    `json:"ttl"`
+	Host             string `json:"host"`
+	Record           string `json:"record"`
+	Priority         *int   `json:"priority,omitempty"`
+	Weight           int    `json:"weight,omitempty"`
+	Port             int    `json:"port,omitempty"`
+	Frame            int    `json:"frame,omitempty"`
+	FrameTitle       string `json:"frame-title,omitempty"`
+	FrameKeywords    string `json:"frame-keywords,omitempty"`
+	FrameDescription string `json:"frame-description,omitempty"`
+	SavePath         int    `json:"save-path,omitempty"`
+	MobileMeta       int    `json:"mobile-meta,omitempty"`
+	RedirectType     int    `json:"redirect-type,omitempty"`
+	Mail             string `json:"mail,omitempty"`
+	Txt              string `json:"txt,omitempty"`
+	Algorithm        string `json:"algorithm,omitempty"`
+	Fptype           string `json:"fptype,omitempty"`
+	Status           int    `json:"status,omitempty"`
+	GeodnsLocation   int    `json:"geodns-location,omitempty"`
+	CaaFlag          int    `json:"caa_flag,omitempty"`
+	CaaType          string `json:"caa_type,omitempty"`
+	CaaValue         string `json:"caa_value,omitempty"`
+	Tusage           string `json:"tlsa_usage,omitempty"`
+	Tselector        string `json:"tlsa_selector,omitempty"`
+	Tmatchtype       string `json:"tlsa_matching_type,omitempty"`
 }
 
 // Read returns the created records (map[string]Returnrec in response)
@@ -173,35 +194,36 @@ func (r createrec) create() (*resty.Response, error) {
 
 // updaterec is the alternative record struct, used here https://www.cloudns.net/wiki/article/60/
 type updaterec struct {
-	Authid         int    `json:"auth-id,omitempty"`
-	Subauthid      int    `json:"sub-auth-id,omitempty"`
-	Authpassword   string `json:"auth-password"`
-	Domain         string `json:"domain-name"`
-	Rid            int    `json:"record-id"`
-	TTL            int    `json:"ttl"`
-	Host           string `json:"host"`
-	Record         string `json:"record"`
-	Priority       *int   `json:"priority,omitempty"`
-	Weight         int    `json:"weight,omitempty"`
-	Port           int    `json:"port,omitempty"`
-	Frame          int    `json:"frame,omitempty"`
-	FrameTitle     string `json:"frame-title,omitempty"`
-	FrameKeywords  string `json:"frame-keywords,omitempty"`
-	FrameDesc      string `json:"frame-description,omitempty"`
-	SavePath       int    `json:"save-path,omitempty"`
-	RedirectType   int    `json:"redirect-type,omitempty"`
-	Mail           string `json:"mail,omitempty"`
-	Txt            string `json:"txt,omitempty"`
-	Algorithm      string `json:"algorithm,omitempty"`
-	Fptype         string `json:"fptype,omitempty"`
-	Status         int    `json:"status,omitempty"`
-	GeodnsLocation int    `json:"geodns-location,omitempty"`
-	CaaFlag        int    `json:"caa_flag,omitempty"`
-	CaaType        string `json:"caa_type,omitempty"`
-	CaaValue       string `json:"caa_value,omitempty"`
-	Tusage         string `json:"tlsa_usage,omitempty"`
-	Tselector      string `json:"tlsa_selector,omitempty"`
-	Tmatchtype     string `json:"tlsa_matching_type,omitempty"`
+	Authid           int    `json:"auth-id,omitempty"`
+	Subauthid        int    `json:"sub-auth-id,omitempty"`
+	Authpassword     string `json:"auth-password"`
+	Domain           string `json:"domain-name"`
+	Rid              int    `json:"record-id"`
+	TTL              int    `json:"ttl"`
+	Host             string `json:"host"`
+	Record           string `json:"record"`
+	Priority         *int   `json:"priority,omitempty"`
+	Weight           int    `json:"weight,omitempty"`
+	Port             int    `json:"port,omitempty"`
+	Frame            int    `json:"frame,omitempty"`
+	FrameTitle       string `json:"frame-title,omitempty"`
+	FrameKeywords    string `json:"frame-keywords,omitempty"`
+	FrameDescription string `json:"frame-description,omitempty"`
+	SavePath         int    `json:"save-path,omitempty"`
+	MobileMeta       int    `json:"mobile-meta,omitempty"`
+	RedirectType     int    `json:"redirect-type,omitempty"`
+	Mail             string `json:"mail,omitempty"`
+	Txt              string `json:"txt,omitempty"`
+	Algorithm        string `json:"algorithm,omitempty"`
+	Fptype           string `json:"fptype,omitempty"`
+	Status           int    `json:"status,omitempty"`
+	GeodnsLocation   int    `json:"geodns-location,omitempty"`
+	CaaFlag          int    `json:"caa_flag,omitempty"`
+	CaaType          string `json:"caa_type,omitempty"`
+	CaaValue         string `json:"caa_value,omitempty"`
+	Tusage           string `json:"tlsa_usage,omitempty"`
+	Tselector        string `json:"tlsa_selector,omitempty"`
+	Tmatchtype       string `json:"tlsa_matching_type,omitempty"`
 }
 
 // Update updates an existing record
