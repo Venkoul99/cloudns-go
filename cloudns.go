@@ -82,11 +82,11 @@ func (z Zone) List(a *Apiaccess) ([]Record, error) {
 			tmpmobilemeta := rec.MobileMeta
 			tmpsavepath := rec.SavePath
 			tmpredirecttype := rec.RedirectType
-			tmpweight := rec.Weight
-			tmpport := rec.Port
+			tmpweight, _ := strconv.Atoi(rec.Weight)
+			tmpport, _ := strconv.Atoi(rec.Port)
 			tmpmail := rec.Mail
 			tmptxt := rec.Txt
-			tmpalgorithm := rec.Algorithm
+			tmpalgorithm, _ := strconv.Atoi(rec.Algorithm)
 			tmpfptype := rec.Fptype
 			tmpflag := rec.Flag
 			tmporder := rec.Order
@@ -122,6 +122,8 @@ func (z Zone) List(a *Apiaccess) ([]Record, error) {
 			tmpsmimeausage := rec.SmimeaUsage
 			tmpsmimeaselector := rec.SmimeaSelector
 			tmpsmimeamatchingtype := rec.SmimeaMatchingType
+			tmpgeodnscode := rec.GeodnsCode
+			tmpgeodnslocation := rec.GeodnsLocation
 
 			rectmp := Record{
 				Domain:             z.Domain,
@@ -178,6 +180,8 @@ func (z Zone) List(a *Apiaccess) ([]Record, error) {
 				SmimeaUsage:        tmpsmimeausage,
 				SmimeaSelector:     tmpsmimeaselector,
 				SmimeaMatchingType: tmpsmimeamatchingtype,
+				GeodnsLocation:     tmpgeodnslocation,
+				GeodnsCode:         tmpgeodnscode,
 			}
 			ra = append(ra, rectmp)
 		}
@@ -283,20 +287,20 @@ type Record struct {
 	RedirectType       int     `json:"redirect-type,omitempty"`
 	Mail               string  `json:"mail,omitempty"`
 	Txt                string  `json:"txt,omitempty"`
-	Algorithm          string  `json:"algorithm,omitempty"`
+	Algorithm          int     `json:"algorithm,omitempty"`
 	Fptype             int     `json:"fptype,omitempty"`
 	Status             int     `json:"status,omitempty"`
-	GeodnsLocation     int     `json:"geodns-location,omitempty"`
+	GeodnsLocation     string  `json:"geodns-location,omitempty"`
 	GeodnsCode         string  `json:"geodns-code,omitempty"`
-	CaaFlag            int     `json:"caa_flag,omitempty"`
+	CaaFlag            string  `json:"caa_flag,omitempty"`
 	CaaType            string  `json:"caa_type,omitempty"`
 	CaaValue           string  `json:"caa_value,omitempty"`
 	TlsaUsage          string  `json:"tlsa_usage,omitempty"`
 	TlsaSelector       string  `json:"tlsa_selector,omitempty"`
 	TlsaMatchingType   string  `json:"tlsa_matching_type,omitempty"`
-	SmimeaUsage        string  `json:"smimea_usage,omitempty"`
-	SmimeaSelector     string  `json:"smimea_selector,omitempty"`
-	SmimeaMatchingType string  `json:"smimea_matching_type,omitempty"`
+	SmimeaUsage        string  `json:"smimea-usage,omitempty"`
+	SmimeaSelector     string  `json:"smimea-selector,omitempty"`
+	SmimeaMatchingType string  `json:"smimea-matching_type,omitempty"`
 	KeyTag             int     `json:"key-tag,omitempty"`
 	DigestType         int     `json:"digest-type,omitempty"`
 	Order              string  `json:"order,omitempty"`
@@ -316,10 +320,10 @@ type Record struct {
 	LongMin            float64 `json:"long-min,omitempty"`
 	LongSec            float64 `json:"long-sec,omitempty"`
 	LongDir            string  `json:"long-dir,omitempty"`
-	Altitude           float64 `json:"altitude,omitempty"`
-	Size               float64 `json:"size,omitempty"`
-	HPrecision         float64 `json:"h-precision,omitempty"`
-	VPrecision         float64 `json:"v-precision,omitempty"`
+	Altitude           string  `json:"altitude,omitempty"`
+	Size               string  `json:"size,omitempty"`
+	HPrecision         string  `json:"h-precision,omitempty"`
+	VPrecision         string  `json:"v-precision,omitempty"`
 	CPU                string  `json:"cpu,omitempty"`
 	OS                 string  `json:"os,omitempty"`
 }
@@ -336,7 +340,8 @@ func (r Record) Create(a *Apiaccess) (Record, error) {
 		TTL:          r.TTL,
 		Record:       r.Record,
 	}
-	if r.Rtype == "MX" || r.Rtype == "SRV" {
+
+	if r.Rtype == "MX" {
 		inr.Priority = &r.Priority
 	} else if r.Rtype == "WR" {
 		inr.Frame = r.Frame
@@ -348,8 +353,8 @@ func (r Record) Create(a *Apiaccess) (Record, error) {
 		inr.RedirectType = r.RedirectType
 	} else if r.Rtype == "SRV" {
 		inr.Priority = &r.Priority
-		inr.Weight = r.Weight
-		inr.Port = r.Port
+		inr.Weight = &r.Weight
+		inr.Port = &r.Port
 	} else if r.Rtype == "RP" {
 		inr.Mail = r.Mail
 		inr.Txt = r.Txt
@@ -400,6 +405,13 @@ func (r Record) Create(a *Apiaccess) (Record, error) {
 		inr.SmimeaMatchingType = r.SmimeaMatchingType
 	}
 
+	if r.GeodnsLocation != "" {
+		inr.GeodnsLocation = r.GeodnsLocation
+	}
+	if r.GeodnsCode != "" {
+		inr.GeodnsCode = r.GeodnsCode
+	}
+
 	resp, err := inr.create()
 	if err == nil {
 		errmsg, isapierr := checkapierr(resp.Body())
@@ -440,11 +452,11 @@ func (r Record) Read(a *Apiaccess) (Record, error) {
 			tmpmobilemeta := rec.MobileMeta
 			tmpsavepath := rec.SavePath
 			tmpredirecttype := rec.RedirectType
-			tmpweight := rec.Weight
-			tmpport := rec.Port
+			tmpweight, _ := strconv.Atoi(rec.Weight)
+			tmpport, _ := strconv.Atoi(rec.Port)
 			tmptxt := rec.Txt
 			tmpmail := rec.Mail
-			tmpalgorithm := rec.Algorithm
+			tmpalgorithm, _ := strconv.Atoi(rec.Algorithm)
 			tmpfptype := rec.Fptype
 			tmpflag := rec.Flag
 			tmporder := rec.Order
@@ -480,6 +492,8 @@ func (r Record) Read(a *Apiaccess) (Record, error) {
 			tmpsmimeausage := rec.SmimeaUsage
 			tmpsmimeaselector := rec.SmimeaSelector
 			tmpsmimeamatchingtype := rec.SmimeaMatchingType
+			tmpgeodnscode := rec.GeodnsCode
+			tmpgeodnslocation := rec.GeodnsLocation
 
 			rectmp := Record{
 				Domain:             r.Domain,
@@ -536,6 +550,8 @@ func (r Record) Read(a *Apiaccess) (Record, error) {
 				SmimeaUsage:        tmpsmimeausage,
 				SmimeaSelector:     tmpsmimeaselector,
 				SmimeaMatchingType: tmpsmimeamatchingtype,
+				GeodnsLocation:     tmpgeodnslocation,
+				GeodnsCode:         tmpgeodnscode,
 			}
 			if r.ID != "" && r.ID == rectmp.ID {
 				return rectmp, err2
@@ -561,7 +577,7 @@ func (r Record) Update(a *Apiaccess) (Record, error) {
 		TTL:          r.TTL,
 		Record:       r.Record,
 	}
-	if r.Rtype == "MX" || r.Rtype == "SRV" {
+	if r.Rtype == "MX" {
 		inr.Priority = &r.Priority
 	} else if r.Rtype == "WR" {
 		inr.Frame = r.Frame
@@ -573,8 +589,8 @@ func (r Record) Update(a *Apiaccess) (Record, error) {
 		inr.RedirectType = r.RedirectType
 	} else if r.Rtype == "SRV" {
 		inr.Priority = &r.Priority
-		inr.Weight = r.Weight
-		inr.Port = r.Port
+		inr.Weight = &r.Weight
+		inr.Port = &r.Port
 	} else if r.Rtype == "RP" {
 		inr.Txt = r.Txt
 		inr.Mail = r.Mail
@@ -623,6 +639,13 @@ func (r Record) Update(a *Apiaccess) (Record, error) {
 		inr.SmimeaUsage = r.SmimeaUsage
 		inr.SmimeaSelector = r.SmimeaSelector
 		inr.SmimeaMatchingType = r.SmimeaMatchingType
+	}
+
+	if r.GeodnsLocation != "" {
+		inr.GeodnsLocation = r.GeodnsLocation
+	}
+	if r.GeodnsCode != "" {
+		inr.GeodnsCode = r.GeodnsCode
 	}
 
 	resp, err := inr.update()

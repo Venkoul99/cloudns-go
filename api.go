@@ -99,8 +99,8 @@ type retrec struct {
 	TTL                string  `json:"ttl"`
 	Record             string  `json:"record"`
 	Priority           string  `json:"priority,omitempty"`
-	Weight             int     `json:"weight,omitempty"`
-	Port               int     `json:"port,omitempty"`
+	Weight             string  `json:"weight,omitempty"`
+	Port               string  `json:"port,omitempty"`
 	Frame              string  `json:"frame,omitempty"`
 	FrameTitle         string  `json:"frame-title,omitempty"`
 	FrameKeywords      string  `json:"frame-keywords,omitempty"`
@@ -113,17 +113,17 @@ type retrec struct {
 	Algorithm          string  `json:"algorithm,omitempty"`
 	Fptype             int     `json:"fptype,omitempty"`
 	Status             int     `json:"status,omitempty"`
-	GeodnsLocation     int     `json:"geodns-location,omitempty"`
+	GeodnsLocation     string  `json:"geodns-location,omitempty"`
 	GeodnsCode         string  `json:"geodns-code,omitempty"`
-	CaaFlag            int     `json:"caa_flag,omitempty"`
+	CaaFlag            string  `json:"caa_flag,omitempty"`
 	CaaType            string  `json:"caa_type,omitempty"`
 	CaaValue           string  `json:"caa_value,omitempty"`
 	TlsaUsage          string  `json:"tlsa_usage,omitempty"`
 	TlsaSelector       string  `json:"tlsa_selector,omitempty"`
 	TlsaMatchingType   string  `json:"tlsa_matching_type,omitempty"`
-	SmimeaUsage        string  `json:"smimea_usage,omitempty"`
-	SmimeaSelector     string  `json:"smimea_selector,omitempty"`
-	SmimeaMatchingType string  `json:"smimea_matching_type,omitempty"`
+	SmimeaUsage        string  `json:"smimea-usage,omitempty"`
+	SmimeaSelector     string  `json:"smimea-selector,omitempty"`
+	SmimeaMatchingType string  `json:"smimea-matching-type,omitempty"`
 	KeyTag             int     `json:"key-tag,omitempty"`
 	DigestType         int     `json:"digest-type,omitempty"`
 	Order              string  `json:"order,omitempty"`
@@ -143,10 +143,10 @@ type retrec struct {
 	LongMin            float64 `json:"long-min,omitempty"`
 	LongSec            float64 `json:"long-sec,omitempty"`
 	LongDir            string  `json:"long-dir,omitempty"`
-	Altitude           float64 `json:"altitude,omitempty"`
-	Size               float64 `json:"size,omitempty"`
-	HPrecision         float64 `json:"h-precision,omitempty"`
-	VPrecision         float64 `json:"v-precision,omitempty"`
+	Altitude           string  `json:"altitude,omitempty"`
+	Size               string  `json:"size,omitempty"`
+	HPrecision         string  `json:"h-precision,omitempty"`
+	VPrecision         string  `json:"v-precision,omitempty"`
 	CPU                string  `json:"cpu,omitempty"`
 	OS                 string  `json:"os,omitempty"`
 }
@@ -179,8 +179,8 @@ type createrec struct {
 	Host               string  `json:"host"`
 	Record             string  `json:"record"`
 	Priority           *int    `json:"priority,omitempty"`
-	Weight             int     `json:"weight,omitempty"`
-	Port               int     `json:"port,omitempty"`
+	Weight             *int    `json:"weight,omitempty"`
+	Port               *int    `json:"port,omitempty"`
 	Frame              string  `json:"frame,omitempty"`
 	FrameTitle         string  `json:"frame-title,omitempty"`
 	FrameKeywords      string  `json:"frame-keywords,omitempty"`
@@ -190,20 +190,20 @@ type createrec struct {
 	RedirectType       int     `json:"redirect-type,omitempty"`
 	Mail               string  `json:"mail,omitempty"`
 	Txt                string  `json:"txt,omitempty"`
-	Algorithm          string  `json:"algorithm,omitempty"`
+	Algorithm          int     `json:"algorithm,omitempty"`
 	Fptype             int     `json:"fptype,omitempty"`
 	Status             int     `json:"status,omitempty"`
-	GeodnsLocation     int     `json:"geodns-location,omitempty"`
+	GeodnsLocation     string  `json:"geodns-location,omitempty"`
 	GeodnsCode         string  `json:"geodns-code,omitempty"`
-	CaaFlag            int     `json:"caa_flag,omitempty"`
+	CaaFlag            string  `json:"caa_flag,omitempty"`
 	CaaType            string  `json:"caa_type,omitempty"`
 	CaaValue           string  `json:"caa_value,omitempty"`
 	TlsaUsage          string  `json:"tlsa_usage,omitempty"`
 	TlsaSelector       string  `json:"tlsa_selector,omitempty"`
 	TlsaMatchingType   string  `json:"tlsa_matching_type,omitempty"`
-	SmimeaUsage        string  `json:"smimea_usage,omitempty"`
-	SmimeaSelector     string  `json:"smimea_selector,omitempty"`
-	SmimeaMatchingType string  `json:"smimea_matching_type,omitempty"`
+	SmimeaUsage        string  `json:"smimea-usage,omitempty"`
+	SmimeaSelector     string  `json:"smimea-selector,omitempty"`
+	SmimeaMatchingType string  `json:"smimea-matching-type,omitempty"`
 	KeyTag             int     `json:"key-tag,omitempty"`
 	DigestType         int     `json:"digest-type,omitempty"`
 	Order              string  `json:"order,omitempty"`
@@ -223,10 +223,10 @@ type createrec struct {
 	LongMin            float64 `json:"long-min,omitempty"`
 	LongSec            float64 `json:"long-sec,omitempty"`
 	LongDir            string  `json:"long-dir,omitempty"`
-	Altitude           float64 `json:"altitude,omitempty"`
-	Size               float64 `json:"size,omitempty"`
-	HPrecision         float64 `json:"h-precision,omitempty"`
-	VPrecision         float64 `json:"v-precision,omitempty"`
+	Altitude           string  `json:"altitude,omitempty"`
+	Size               string  `json:"size,omitempty"`
+	HPrecision         string  `json:"h-precision,omitempty"`
+	VPrecision         string  `json:"v-precision,omitempty"`
 	CPU                string  `json:"cpu,omitempty"`
 	OS                 string  `json:"os,omitempty"`
 }
@@ -261,8 +261,8 @@ type updaterec struct {
 	Host               string  `json:"host"`
 	Record             string  `json:"record"`
 	Priority           *int    `json:"priority,omitempty"`
-	Weight             int     `json:"weight,omitempty"`
-	Port               int     `json:"port,omitempty"`
+	Weight             *int    `json:"weight,omitempty"`
+	Port               *int    `json:"port,omitempty"`
 	Frame              string  `json:"frame,omitempty"`
 	FrameTitle         string  `json:"frame-title,omitempty"`
 	FrameKeywords      string  `json:"frame-keywords,omitempty"`
@@ -272,20 +272,20 @@ type updaterec struct {
 	RedirectType       int     `json:"redirect-type,omitempty"`
 	Mail               string  `json:"mail,omitempty"`
 	Txt                string  `json:"txt,omitempty"`
-	Algorithm          string  `json:"algorithm,omitempty"`
+	Algorithm          int     `json:"algorithm,omitempty"`
 	Fptype             int     `json:"fptype,omitempty"`
 	Status             int     `json:"status,omitempty"`
-	GeodnsLocation     int     `json:"geodns-location,omitempty"`
+	GeodnsLocation     string  `json:"geodns-location,omitempty"`
 	GeodnsCode         string  `json:"geodns-code,omitempty"`
-	CaaFlag            int     `json:"caa_flag,omitempty"`
+	CaaFlag            string  `json:"caa_flag,omitempty"`
 	CaaType            string  `json:"caa_type,omitempty"`
 	CaaValue           string  `json:"caa_value,omitempty"`
 	TlsaUsage          string  `json:"tlsa_usage,omitempty"`
 	TlsaSelector       string  `json:"tlsa_selector,omitempty"`
 	TlsaMatchingType   string  `json:"tlsa_matching_type,omitempty"`
-	SmimeaUsage        string  `json:"smimea_usage,omitempty"`
-	SmimeaSelector     string  `json:"smimea_selector,omitempty"`
-	SmimeaMatchingType string  `json:"smimea_matching_type,omitempty"`
+	SmimeaUsage        string  `json:"smimea-usage,omitempty"`
+	SmimeaSelector     string  `json:"smimea-selector,omitempty"`
+	SmimeaMatchingType string  `json:"smimea-matching-type,omitempty"`
 	KeyTag             int     `json:"key-tag,omitempty"`
 	DigestType         int     `json:"digest-type,omitempty"`
 	Order              string  `json:"order,omitempty"`
@@ -305,10 +305,10 @@ type updaterec struct {
 	LongMin            float64 `json:"long-min,omitempty"`
 	LongSec            float64 `json:"long-sec,omitempty"`
 	LongDir            string  `json:"long-dir,omitempty"`
-	Altitude           float64 `json:"altitude,omitempty"`
-	Size               float64 `json:"size,omitempty"`
-	HPrecision         float64 `json:"h-precision,omitempty"`
-	VPrecision         float64 `json:"v-precision,omitempty"`
+	Altitude           string  `json:"altitude,omitempty"`
+	Size               string  `json:"size,omitempty"`
+	HPrecision         string  `json:"h-precision,omitempty"`
+	VPrecision         string  `json:"v-precision,omitempty"`
 	CPU                string  `json:"cpu,omitempty"`
 	OS                 string  `json:"os,omitempty"`
 }
