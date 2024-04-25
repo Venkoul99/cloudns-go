@@ -35,6 +35,7 @@ type apierr struct {
 type retzone struct {
 	Domain string `json:"name"`
 	Ztype  string `json:"type"`
+	Master string `json:"master-ip,omitempty"`
 }
 
 // this function will check a byte array for the error message from ClouDNS
@@ -65,6 +66,7 @@ type rectypes struct {
 	Subauthid    int    `json:"sub-auth-id,omitempty"`
 	Authpassword string `json:"auth-password"`
 	Ztype        string `json:"zone-type"`
+	Master       string `json:"master-ip,omitempty"`
 }
 
 // Availabletype gets the currently available Record-Types

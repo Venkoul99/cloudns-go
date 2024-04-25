@@ -22,6 +22,7 @@ type Zone struct {
 	Domain string   `json:"domain-name"`
 	Ztype  string   `json:"zone-type"`
 	Ns     []string `json:"ns,omitempty"`
+	Master string   `json:"master-ip,omitempty"`
 }
 
 // Listzones returns all zones (max: 100)
@@ -199,6 +200,7 @@ func (z Zone) Create(a *Apiaccess) (Zone, error) {
 		Domain:       z.Domain,
 		Ztype:        z.Ztype,
 		Ns:           z.Ns,
+		Master:       z.Master,
 	}
 	resp, err := cr.create()
 	if err == nil {
@@ -219,6 +221,7 @@ func (z Zone) Read(a *Apiaccess) (Zone, error) {
 		Domain:       z.Domain,
 		Ztype:        z.Ztype,
 		Ns:           z.Ns,
+		Master:       z.Master,
 	}
 	resp, err := cr.read()
 	var zlint []retzone
@@ -255,6 +258,7 @@ func (z Zone) Destroy(a *Apiaccess) (Zone, error) {
 		Domain:       z.Domain,
 		Ztype:        z.Ztype,
 		Ns:           z.Ns,
+		Master:       z.Master,
 	}
 	resp, err := cr.destroy()
 	if err == nil {
