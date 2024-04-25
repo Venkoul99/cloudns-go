@@ -72,9 +72,10 @@ func (z Zone) List(a *Apiaccess) ([]Record, error) {
 		var ratmp map[string]retrec
 		err2 := json.Unmarshal(resp.Body(), &ratmp)
 		for _, rec := range ratmp {
+
 			tmpttl, _ := strconv.Atoi(rec.TTL)
 			tmppriority, _ := strconv.Atoi(rec.Priority)
-			tmpframe, _ := strconv.Atoi(rec.Frame)
+			tmpframe := rec.Frame
 			tmpframetitle := rec.FrameTitle
 			tmpframekeywords := rec.FrameKeywords
 			tmpframedescription := rec.FrameDescription
@@ -85,29 +86,98 @@ func (z Zone) List(a *Apiaccess) ([]Record, error) {
 			tmpport := rec.Port
 			tmpmail := rec.Mail
 			tmptxt := rec.Txt
-			tmpalgorithm, _ := strconv.Atoi(rec.Algorithm)
+			tmpalgorithm := rec.Algorithm
 			tmpfptype := rec.Fptype
+			tmpflag := rec.Flag
+			tmporder := rec.Order
+			tmppref := rec.Pref
+			tmpparams := rec.Params
+			tmpregexp := rec.Regexp
+			tmpreplace := rec.Replace
+			tmpcaaflag := rec.CaaFlag
+			tmpcaatype := rec.CaaType
+			tmpcaavalue := rec.CaaValue
+			tmptlsausage := rec.TlsaUsage
+			tmptlsaselector := rec.TlsaSelector
+			tmptlsamatchingtype := rec.TlsaMatchingType
+			tmpkeytag := rec.KeyTag
+			tmpdigesttype := rec.DigestType
+			tmpcerttype := rec.CertType
+			tmpcertkeytag := rec.CertKeyTag
+			tmpcertalgorithm := rec.CertAlgorithm
+			tmpcpu := rec.CPU
+			tmpos := rec.OS
+			tmplatdeg := rec.LatDeg
+			tmplatmin := rec.LatMin
+			tmplatsec := rec.LatSec
+			tmplatdir := rec.LatDir
+			tmplongdeg := rec.LongDeg
+			tmplongmin := rec.LongMin
+			tmplongsec := rec.LongSec
+			tmplongdir := rec.LongDir
+			tmpaltitude := rec.Altitude
+			tmpsize := rec.Size
+			tmphprecision := rec.HPrecision
+			tmpvprecision := rec.VPrecision
+			tmpsmimeausage := rec.SmimeaUsage
+			tmpsmimeaselector := rec.SmimeaSelector
+			tmpsmimeamatchingtype := rec.SmimeaMatchingType
+
 			rectmp := Record{
-				Domain:           z.Domain,
-				ID:               rec.ID,
-				Rtype:            rec.Rtype,
-				Host:             rec.Host,
-				TTL:              tmpttl,
-				Record:           rec.Record,
-				Priority:         tmppriority,
-				Frame:            tmpframe,
-				FrameTitle:       tmpframetitle,
-				FrameKeywords:    tmpframekeywords,
-				FrameDescription: tmpframedescription,
-				MobileMeta:       tmpmobilemeta,
-				SavePath:         tmpsavepath,
-				RedirectType:     tmpredirecttype,
-				Weight:           tmpweight,
-				Port:             tmpport,
-				Mail:             tmpmail,
-				Txt:              tmptxt,
-				Algorithm:        tmpalgorithm,
-				Fptype:           tmpfptype,
+				Domain:             z.Domain,
+				ID:                 rec.ID,
+				Rtype:              rec.Rtype,
+				Host:               rec.Host,
+				TTL:                tmpttl,
+				Record:             rec.Record,
+				Priority:           tmppriority,
+				Frame:              tmpframe,
+				FrameTitle:         tmpframetitle,
+				FrameKeywords:      tmpframekeywords,
+				FrameDescription:   tmpframedescription,
+				MobileMeta:         tmpmobilemeta,
+				SavePath:           tmpsavepath,
+				RedirectType:       tmpredirecttype,
+				Weight:             tmpweight,
+				Port:               tmpport,
+				Mail:               tmpmail,
+				Txt:                tmptxt,
+				Algorithm:          tmpalgorithm,
+				Fptype:             tmpfptype,
+				Flag:               tmpflag,
+				Order:              tmporder,
+				Pref:               tmppref,
+				Params:             tmpparams,
+				Regexp:             tmpregexp,
+				Replace:            tmpreplace,
+				CaaFlag:            tmpcaaflag,
+				CaaType:            tmpcaatype,
+				CaaValue:           tmpcaavalue,
+				TlsaUsage:          tmptlsausage,
+				TlsaSelector:       tmptlsaselector,
+				TlsaMatchingType:   tmptlsamatchingtype,
+				KeyTag:             tmpkeytag,
+				DigestType:         tmpdigesttype,
+				CertType:           tmpcerttype,
+				CertKeyTag:         tmpcertkeytag,
+				CertAlgorithm:      tmpcertalgorithm,
+				CPU:                tmpcpu,
+				OS:                 tmpos,
+				LatDeg:             tmplatdeg,
+				LatMin:             tmplatmin,
+				LatSec:             tmplatsec,
+				LatDir:             tmplatdir,
+				LongDeg:            tmplongdeg,
+				LongMin:            tmplongmin,
+				LongSec:            tmplongsec,
+				LongDir:            tmplongdir,
+				Altitude:           tmpaltitude,
+				Size:               tmpsize,
+				HPrecision:         tmphprecision,
+				VPrecision:         tmpvprecision,
+				SmimeaUsage:        tmpsmimeausage,
+				SmimeaSelector:     tmpsmimeaselector,
+				SmimeaMatchingType: tmpsmimeamatchingtype,
 			}
 			ra = append(ra, rectmp)
 		}
@@ -204,7 +274,7 @@ type Record struct {
 	Priority           int     `json:"priority,omitempty"`
 	Weight             int     `json:"weight,omitempty"`
 	Port               int     `json:"port,omitempty"`
-	Frame              int     `json:"frame,omitempty"`
+	Frame              string  `json:"frame,omitempty"`
 	FrameTitle         string  `json:"frame-title,omitempty"`
 	FrameKeywords      string  `json:"frame-keywords,omitempty"`
 	FrameDescription   string  `json:"frame-description,omitempty"`
@@ -213,7 +283,7 @@ type Record struct {
 	RedirectType       int     `json:"redirect-type,omitempty"`
 	Mail               string  `json:"mail,omitempty"`
 	Txt                string  `json:"txt,omitempty"`
-	Algorithm          int     `json:"algorithm,omitempty"`
+	Algorithm          string  `json:"algorithm,omitempty"`
 	Fptype             int     `json:"fptype,omitempty"`
 	Status             int     `json:"status,omitempty"`
 	GeodnsLocation     int     `json:"geodns-location,omitempty"`
@@ -231,10 +301,10 @@ type Record struct {
 	DigestType         int     `json:"digest-type,omitempty"`
 	Order              string  `json:"order,omitempty"`
 	Pref               string  `json:"pref,omitempty"`
-	Flag               int     `json:"flag,omitempty"`
+	Flag               string  `json:"flag,omitempty"`
 	Params             string  `json:"params,omitempty"`
 	Regexp             string  `json:"regexp,omitempty"`
-	Replace            int     `json:"replace,omitempty"`
+	Replace            string  `json:"replace,omitempty"`
 	CertType           int     `json:"cert-type,omitempty"`
 	CertKeyTag         int     `json:"cert-key-tag,omitempty"`
 	CertAlgorithm      int     `json:"cert-algorithm,omitempty"`
@@ -363,7 +433,7 @@ func (r Record) Read(a *Apiaccess) (Record, error) {
 		for _, rec := range ratmp {
 			tmpttl, _ := strconv.Atoi(rec.TTL)
 			tmppriority, _ := strconv.Atoi(rec.Priority)
-			tmpframe, _ := strconv.Atoi(rec.Frame)
+			tmpframe := rec.Frame
 			tmpframetitle := rec.FrameTitle
 			tmpframekeywords := rec.FrameKeywords
 			tmpframedescription := rec.FrameDescription
@@ -374,34 +444,103 @@ func (r Record) Read(a *Apiaccess) (Record, error) {
 			tmpport := rec.Port
 			tmptxt := rec.Txt
 			tmpmail := rec.Mail
-			tmpalgorithm, _ := strconv.Atoi(rec.Algorithm)
+			tmpalgorithm := rec.Algorithm
 			tmpfptype := rec.Fptype
+			tmpflag := rec.Flag
+			tmporder := rec.Order
+			tmppref := rec.Pref
+			tmpparams := rec.Params
+			tmpregexp := rec.Regexp
+			tmpreplace := rec.Replace
+			tmpcaaflag := rec.CaaFlag
+			tmpcaatype := rec.CaaType
+			tmpcaavalue := rec.CaaValue
+			tmptlsausage := rec.TlsaUsage
+			tmptlsaselector := rec.TlsaSelector
+			tmptlsamatchingtype := rec.TlsaMatchingType
+			tmpkeytag := rec.KeyTag
+			tmpdigesttype := rec.DigestType
+			tmpcerttype := rec.CertType
+			tmpcertkeytag := rec.CertKeyTag
+			tmpcertalgorithm := rec.CertAlgorithm
+			tmpcpu := rec.CPU
+			tmpos := rec.OS
+			tmplatdeg := rec.LatDeg
+			tmplatmin := rec.LatMin
+			tmplatsec := rec.LatSec
+			tmplatdir := rec.LatDir
+			tmplongdeg := rec.LongDeg
+			tmplongmin := rec.LongMin
+			tmplongsec := rec.LongSec
+			tmplongdir := rec.LongDir
+			tmpaltitude := rec.Altitude
+			tmpsize := rec.Size
+			tmphprecision := rec.HPrecision
+			tmpvprecision := rec.VPrecision
+			tmpsmimeausage := rec.SmimeaUsage
+			tmpsmimeaselector := rec.SmimeaSelector
+			tmpsmimeamatchingtype := rec.SmimeaMatchingType
+
 			rectmp := Record{
-				Domain:           r.Domain,
-				ID:               rec.ID,
-				Rtype:            rec.Rtype,
-				Host:             rec.Host,
-				TTL:              tmpttl,
-				Record:           rec.Record,
-				Priority:         tmppriority,
-				Frame:            tmpframe,
-				FrameTitle:       tmpframetitle,
-				FrameKeywords:    tmpframekeywords,
-				FrameDescription: tmpframedescription,
-				MobileMeta:       tmpmobilemeta,
-				SavePath:         tmpsavepath,
-				RedirectType:     tmpredirecttype,
-				Weight:           tmpweight,
-				Port:             tmpport,
-				Txt:              tmptxt,
-				Mail:             tmpmail,
-				Algorithm:        tmpalgorithm,
-				Fptype:           tmpfptype,
+				Domain:             r.Domain,
+				ID:                 rec.ID,
+				Rtype:              rec.Rtype,
+				Host:               rec.Host,
+				TTL:                tmpttl,
+				Record:             rec.Record,
+				Priority:           tmppriority,
+				Frame:              tmpframe,
+				FrameTitle:         tmpframetitle,
+				FrameKeywords:      tmpframekeywords,
+				FrameDescription:   tmpframedescription,
+				MobileMeta:         tmpmobilemeta,
+				SavePath:           tmpsavepath,
+				RedirectType:       tmpredirecttype,
+				Weight:             tmpweight,
+				Port:               tmpport,
+				Mail:               tmpmail,
+				Txt:                tmptxt,
+				Algorithm:          tmpalgorithm,
+				Fptype:             tmpfptype,
+				Flag:               tmpflag,
+				Order:              tmporder,
+				Pref:               tmppref,
+				Params:             tmpparams,
+				Regexp:             tmpregexp,
+				Replace:            tmpreplace,
+				CaaFlag:            tmpcaaflag,
+				CaaType:            tmpcaatype,
+				CaaValue:           tmpcaavalue,
+				TlsaUsage:          tmptlsausage,
+				TlsaSelector:       tmptlsaselector,
+				TlsaMatchingType:   tmptlsamatchingtype,
+				KeyTag:             tmpkeytag,
+				DigestType:         tmpdigesttype,
+				CertType:           tmpcerttype,
+				CertKeyTag:         tmpcertkeytag,
+				CertAlgorithm:      tmpcertalgorithm,
+				CPU:                tmpcpu,
+				OS:                 tmpos,
+				LatDeg:             tmplatdeg,
+				LatMin:             tmplatmin,
+				LatSec:             tmplatsec,
+				LatDir:             tmplatdir,
+				LongDeg:            tmplongdeg,
+				LongMin:            tmplongmin,
+				LongSec:            tmplongsec,
+				LongDir:            tmplongdir,
+				Altitude:           tmpaltitude,
+				Size:               tmpsize,
+				HPrecision:         tmphprecision,
+				VPrecision:         tmpvprecision,
+				SmimeaUsage:        tmpsmimeausage,
+				SmimeaSelector:     tmpsmimeaselector,
+				SmimeaMatchingType: tmpsmimeamatchingtype,
 			}
 			if r.ID != "" && r.ID == rectmp.ID {
 				return rectmp, err2
 			}
-			// if we do not have an ID match, we return the last one ...
+
 			return rectmp, err2
 		}
 		return r, err2
@@ -442,6 +581,48 @@ func (r Record) Update(a *Apiaccess) (Record, error) {
 	} else if r.Rtype == "SSHFP" {
 		inr.Algorithm = r.Algorithm
 		inr.Fptype = r.Fptype
+	} else if r.Rtype == "NAPTR" {
+		inr.Flag = r.Flag
+		inr.Order = r.Order
+		inr.Pref = r.Pref
+		inr.Params = r.Params
+		inr.Regexp = r.Regexp
+		inr.Replace = r.Replace
+	} else if r.Rtype == "CAA" {
+		inr.CaaFlag = r.CaaFlag
+		inr.CaaType = r.CaaType
+		inr.CaaValue = r.CaaValue
+	} else if r.Rtype == "TLSA" {
+		inr.TlsaUsage = r.TlsaUsage
+		inr.TlsaSelector = r.TlsaSelector
+		inr.TlsaMatchingType = r.TlsaMatchingType
+	} else if r.Rtype == "DS" {
+		inr.KeyTag = r.KeyTag
+		inr.Algorithm = r.Algorithm
+		inr.DigestType = r.DigestType
+	} else if r.Rtype == "CERT" {
+		inr.CertType = r.CertAlgorithm
+		inr.CertKeyTag = r.CertKeyTag
+		inr.CertAlgorithm = r.CertAlgorithm
+	} else if r.Rtype == "HINFO" {
+		inr.CPU = r.CPU
+		inr.OS = r.OS
+	} else if r.Rtype == "LOC" {
+		inr.LatDeg = r.LatDeg
+		inr.LatMin = r.LatMin
+		inr.LatDir = r.LatDir
+		inr.LongDeg = r.LongDeg
+		inr.LongMin = r.LongMin
+		inr.LongSec = r.LongSec
+		inr.LongDir = r.LongDir
+		inr.Altitude = r.Altitude
+		inr.Size = r.Size
+		inr.HPrecision = r.HPrecision
+		inr.VPrecision = r.VPrecision
+	} else if r.Rtype == "SMIMEA" {
+		inr.SmimeaUsage = r.SmimeaUsage
+		inr.SmimeaSelector = r.SmimeaSelector
+		inr.SmimeaMatchingType = r.SmimeaMatchingType
 	}
 
 	resp, err := inr.update()

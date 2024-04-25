@@ -101,7 +101,7 @@ type retrec struct {
 	Priority           string  `json:"priority,omitempty"`
 	Weight             int     `json:"weight,omitempty"`
 	Port               int     `json:"port,omitempty"`
-	Frame              int     `json:"frame,omitempty"`
+	Frame              string  `json:"frame,omitempty"`
 	FrameTitle         string  `json:"frame-title,omitempty"`
 	FrameKeywords      string  `json:"frame-keywords,omitempty"`
 	FrameDescription   string  `json:"frame-description,omitempty"`
@@ -110,7 +110,7 @@ type retrec struct {
 	RedirectType       int     `json:"redirect-type,omitempty"`
 	Mail               string  `json:"mail,omitempty"`
 	Txt                string  `json:"txt,omitempty"`
-	Algorithm          int     `json:"algorithm,omitempty"`
+	Algorithm          string  `json:"algorithm,omitempty"`
 	Fptype             int     `json:"fptype,omitempty"`
 	Status             int     `json:"status,omitempty"`
 	GeodnsLocation     int     `json:"geodns-location,omitempty"`
@@ -128,10 +128,10 @@ type retrec struct {
 	DigestType         int     `json:"digest-type,omitempty"`
 	Order              string  `json:"order,omitempty"`
 	Pref               string  `json:"pref,omitempty"`
-	Flag               int     `json:"flag,omitempty"`
+	Flag               string  `json:"flag,omitempty"`
 	Params             string  `json:"params,omitempty"`
 	Regexp             string  `json:"regexp,omitempty"`
-	Replace            int     `json:"replace,omitempty"`
+	Replace            string  `json:"replace,omitempty"`
 	CertType           int     `json:"cert-type,omitempty"`
 	CertKeyTag         int     `json:"cert-key-tag,omitempty"`
 	CertAlgorithm      int     `json:"cert-algorithm,omitempty"`
@@ -181,7 +181,7 @@ type createrec struct {
 	Priority           *int    `json:"priority,omitempty"`
 	Weight             int     `json:"weight,omitempty"`
 	Port               int     `json:"port,omitempty"`
-	Frame              int     `json:"frame,omitempty"`
+	Frame              string  `json:"frame,omitempty"`
 	FrameTitle         string  `json:"frame-title,omitempty"`
 	FrameKeywords      string  `json:"frame-keywords,omitempty"`
 	FrameDescription   string  `json:"frame-description,omitempty"`
@@ -190,7 +190,7 @@ type createrec struct {
 	RedirectType       int     `json:"redirect-type,omitempty"`
 	Mail               string  `json:"mail,omitempty"`
 	Txt                string  `json:"txt,omitempty"`
-	Algorithm          int     `json:"algorithm,omitempty"`
+	Algorithm          string  `json:"algorithm,omitempty"`
 	Fptype             int     `json:"fptype,omitempty"`
 	Status             int     `json:"status,omitempty"`
 	GeodnsLocation     int     `json:"geodns-location,omitempty"`
@@ -208,10 +208,10 @@ type createrec struct {
 	DigestType         int     `json:"digest-type,omitempty"`
 	Order              string  `json:"order,omitempty"`
 	Pref               string  `json:"pref,omitempty"`
-	Flag               int     `json:"flag,omitempty"`
+	Flag               string  `json:"flag,omitempty"`
 	Params             string  `json:"params,omitempty"`
 	Regexp             string  `json:"regexp,omitempty"`
-	Replace            int     `json:"replace,omitempty"`
+	Replace            string  `json:"replace,omitempty"`
 	CertType           int     `json:"cert-type,omitempty"`
 	CertKeyTag         int     `json:"cert-key-tag,omitempty"`
 	CertAlgorithm      int     `json:"cert-algorithm,omitempty"`
@@ -263,7 +263,7 @@ type updaterec struct {
 	Priority           *int    `json:"priority,omitempty"`
 	Weight             int     `json:"weight,omitempty"`
 	Port               int     `json:"port,omitempty"`
-	Frame              int     `json:"frame,omitempty"`
+	Frame              string  `json:"frame,omitempty"`
 	FrameTitle         string  `json:"frame-title,omitempty"`
 	FrameKeywords      string  `json:"frame-keywords,omitempty"`
 	FrameDescription   string  `json:"frame-description,omitempty"`
@@ -272,7 +272,7 @@ type updaterec struct {
 	RedirectType       int     `json:"redirect-type,omitempty"`
 	Mail               string  `json:"mail,omitempty"`
 	Txt                string  `json:"txt,omitempty"`
-	Algorithm          int     `json:"algorithm,omitempty"`
+	Algorithm          string  `json:"algorithm,omitempty"`
 	Fptype             int     `json:"fptype,omitempty"`
 	Status             int     `json:"status,omitempty"`
 	GeodnsLocation     int     `json:"geodns-location,omitempty"`
@@ -290,10 +290,10 @@ type updaterec struct {
 	DigestType         int     `json:"digest-type,omitempty"`
 	Order              string  `json:"order,omitempty"`
 	Pref               string  `json:"pref,omitempty"`
-	Flag               int     `json:"flag,omitempty"`
+	Flag               string  `json:"flag,omitempty"`
 	Params             string  `json:"params,omitempty"`
 	Regexp             string  `json:"regexp,omitempty"`
-	Replace            int     `json:"replace,omitempty"`
+	Replace            string  `json:"replace,omitempty"`
 	CertType           int     `json:"cert-type,omitempty"`
 	CertKeyTag         int     `json:"cert-key-tag,omitempty"`
 	CertAlgorithm      int     `json:"cert-algorithm,omitempty"`
