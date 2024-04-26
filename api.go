@@ -10,7 +10,7 @@ import (
 
 // this is the communicated api endpoint
 const (
-	apiurl = "https://api.cloudns.net"
+	apiurl = "https://apidev.cloudns.net"
 )
 
 // this is how we will do requests
