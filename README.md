@@ -2,13 +2,6 @@
 
 This is an API-Client for the [ClouDNS HTTP API](https://www.cloudns.net/wiki/article/42/) written in [Go](https://golang.org)
 
-## Noob code warning
-
-Currently this software is  written by an [absolute noob in go](https://github.com/matschundbrei). 
-Therefore, I am very happy about any pointers toward making the code simpler, faster or more lightweight.
-
-Use at your own risk!
-
 ## Usage
 
 ### Structs
@@ -174,7 +167,3 @@ if rderr == nil {
     spew.Println(rderr)
 }
 ```
-
-## Limitations
-
-I did not yet touched any of the advanced features, that ClouDNS offers. For details please check the [limitations](limitations.md)
